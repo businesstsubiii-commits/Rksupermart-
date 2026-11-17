@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rk Supermart - Best Offers & Schemes</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdf4f2',
+                            100: '#fbe8e4',
+                            500: '#e05638',
+                            600: '#c84223',
+                            700: '#a3341b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+    /* 1. Products Grid jo mobile aur PC par auto-adjust hogi */
+    .auto-ecommerce-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        padding: 15px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* 2. Har product card ko ekdum fix aur uniform size dene ke liye */
+    .standard-product-card {
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        
+        /* Yeh sabhi cards ki height ek barabar (uniform) karega */
+        height: 380px; 
+        box-sizing: border-box;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+        transition: box-shadow 0.2s ease;
+    }
+
+    .standard-product-card:hover {
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    /* 3. Images ka size fix rakhne ke liye taaki stretch ya overlap na ho */
+    .standard-product-card img {
+        width: 100%;
+        height: 170px;
+        object-fit: contain;
+        margin-bottom: 10px;
+    }
+</style>
+
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+       
+   <!-- Header / Navbar (Clean on Scroll) -->
+   <header style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center; border-bottom: 4px solid #e67e22; box-shadow: 0 4px 12px rgba(0,0,0,0.2); position: sticky; top: 0; z-index:1000;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+        
+        <!-- 1. Circular HD Logo on Left -->
+        <div class="logo-container" style="display: flex; align-items: center; gap: 12px;">
+            <a href="index.html">
+                <img src="logo2.jpg" onerror="this.src='https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=200&q=80'" alt="RK Supermart Logo" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 3px solid #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: block;">
+            </a>
+        </div>
+
+        <!-- 2. Centered Store Name with Grocery Theme -->
+        <div style="text-align: center; margin: 0 auto;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 3px;">
+                <span style="background: #e67e22; color: #fff; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;">🛒 Supermarket & Grocery</span>
+            </div>
+            <h1 style="margin: 0; font-family: 'Poppins', 'Segoe UI', sans-serif; font-size: 38px; font-weight: 800; letter-spacing: 2px; color: #ffffff; text-transform: uppercase; text-shadow: 2px 2px 4px rgba(0,0,0,0.6);">
+                RK Supermart
+            </h1>
+            <p style="margin: 3px 0 0 0; font-family: 'Segoe UI', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2.5px; color: #f39c12; text-transform: uppercase; text-shadow: 1px 1px 2px rgba(0,0,0,0.6);">
+                🍎 Fresh Groceries & Savings Daily 🛍️
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Navigation Tabs Bar -->
+    <div style="background: rgba(255,255,255,0.95); padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.2);">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: center;">
+            <nav class="flex flex-wrap justify-center gap-2 p-1 rounded-xl">
+                <button onclick="switchTab('offers')" id="nav-offers" class="px-4 py-2 rounded-lg text-sm font-bold transition-all bg-brand-500 text-white shadow">
+                    <i class="fa-solid fa-tags mr-1.5"></i> Customer Offers
+                </button>
+                <button onclick="switchTab('schemes')" id="nav-schemes" class="px-4 py-2 rounded-lg text-sm font-bold transition-all text-gray-600 hover:text-brand-600 bg-gray-200">
+                    <i class="fa-solid fa-gift mr-1.5"></i> Store Schemes
+                </button>
+ <button onclick="switchTab('COUPON CUSTOMRS')" id="COUPON CUSTOMERS" class="px-4 py-2 rounded-lg text-sm font-bold transition-all text-gray-600 hover:text-brand-600 bg-gray-200">
+                    <i class="fa-solid fa-comments mr-1.5"></i> COUPON CUSTOMERS
+                </button>
+                <button onclick="switchTab('feedback')" id="nav-feedback" class="px-4 py-2 rounded-lg text-sm font-bold transition-all text-gray-600 hover:text-brand-600 bg-gray-200">
+                    <i class="fa-solid fa-comments mr-1.5"></i> Customer Feedback
+                </button>
+            </nav>
+        </div>
+    </div>
+</header>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full">
+        
+<!-- Radha Ji ke 108 Naam Moving Text -->
+<div style="width: 100%; overflow: hidden; padding: 15px 0;">
+    <link href="https://fonts.googleapis.com/css2?family=Rozha+One&display=swap" rel="stylesheet">
+    
+    <marquee behavior="scroll" direction="left" scrollamount="5" style="width: 100%;">
+        <span style="font-family: 'Rozha One', serif; font-size: 32px; color: #ff6600; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); letter-spacing: 1px; white-space: nowrap;">
+            ॐ श्री राधायै नमः ✦ श्री राधा ✦ राधिका ✦ रासेश्वरी ✦ रसिकेश्वरी ✦ कृष्णप्रिया ✦ रूपमंजरी ✦ कीर्तिनंदिनी ✦ वृषभानुसुता ✦ वृंदावनेश्वरी ✦ लालितासखीसेविता ✦ गोपीसुंदरी ✦ कृष्णकान्ता ✦ सुकुमारी ✦ चंद्रमुखी ✦ पद्ममुखी ✦ कृष्णमोहिनी ✦ सर्वकान्तामणी ✦ महाभागा ✦ सर्वज्ञानी ✦ करुणामयी ✦ प्रेममूर्ती ✦ आनंदमयी ✦ नित्ययौवना ✦ कृष्णचेतसा ✦ गोकुलानंदा ✦ वृंदावनविहारिणी ✦ रासमंडलेश्वर ✦ भक्तवत्सला ✦ सुशीला ✦ मृदुभाषिणी ✦ रूपयौवनसम्पन्ना ✦ कृष्णप्राणाधिका ✦ सर्वसौभाग्यमयी ✦ पूर्णचन्द्रप्रभा ✦ श्यामसङ्गिनी ✦ गोपीजनवल्लभा ✦ ब्रजराजसुता ✦ नन्दनंदनप्रिया ✦ कोटिकंदर्पलावण्या ✦ तरुणार्कसमप्रभा ✦ इందిरा ✦ कमला ✦ कांता ✦ रोहिणी ✦ अदिति ✦ देवमाता ✦ यशोदास्नेहपात्रिका ✦ ब्रजेश्वरी ✦ मधुमती ✦ प्रेमातुरा ✦ रासक्रीडापरा ✦ मुरलीवाद्यरता ✦ गोकुलोत्सवकारिणी ✦ नन्दगोपाङ्गनासेव्या ✦ वृषभाणुपुरवासिनी ✦ यमुनापुलिनविहारिणी ✦ कदम्बवृक्षमूलस्थिता ✦ मणिकंचनभूषिता ✦ श्वेतवस्त्रावृता ✦ दिव्यचन्दनचर्चिता ✦ मालिकाशोभिता ✦ रत्नकुण्डलमण्डिता ✦ नूपुरध्वनिमोहिनी ✦ कङ्कणक्वाणनिनदिता ✦ हास्यप्रियतरा ✦ मृदुहासिनी ✦ करुणापूर्णदृष्टिनी ✦ भक्तसंकटहारिणी ✦ मुक्तिप्रदायिनी ✦ भक्तिप्रिया ✦ योगनिद्रा ✦ महामाया ✦ मूलप्रकृतिसंस्थिता ✦ सर्वशक्तिस्वरूपा ✦ सत्यरूपा ✦ सनातनिका ✦ ब्रह्मरूपिणी ✦ सच्चिदानंदविग्रहा ✦ कोटिकोटिब्रह्मांडनायिका ✦ सर्वेश्‍वरी ✦ पराशक्ति ✦ परानंदा ✦ परमेश्वरी ✦ त्रैलोक्यसुंदरी ✦ जगतपूज्यपदा ✦ मंगला ✦ शुभप्रदा ✦ सर्वसिद्धिप्रदा ✦ कामदायिनी ✦ मोक्षदायिनी ✦ पुण्यकीर्ति ✦ यशस्विनी ✦ गुणमयी ✦ लीलामयी ✦ दिव्याङ्गी ✦ सुलोचना ✦ चारुहासिनी ✦ सुगात्री ✦ पद्मगर्भा ✦ हरिवल्लभा ✦ श्यामसुन्दरप्रिया ✦ राधानारायणी ✦ श्रीराधाकृष्णयोः ऐक्यरूपा ✦ सर्वमङ्गलामाङ्गल्ये शिवे सर्वार्थसाधिके ✦ ॐ श्री राधायै नमः ✦
+        </span>
+    </marquee>
+<div>
+    <!-- Yeh raha CSS Style jo iske design ko manage karega -->
+    <style>
+        .my-ecommerce-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .my-product-card {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        .my-product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+        .my-product-card img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        .my-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .my-price {
+            font-size: 16px;
+            color: #27ae60;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .my-btn {
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+        }
+    </style>
+
+        <!-- ================= SECTION 1: CUSTOMER OFFERS ================= -->
+        <section id="tab-offers" class="tab-content">
+            <div class="text-center mb-10">
+                <span class="bg-brand-100 text-brand-700 text-xs font-bold uppercase px-3 py-1 rounded-full">Hot Deals</span>
+                <h2 class="text-3xl font-extrabold text-gray-900 mt-2">Current Supermarket Offers</h2>
+                <p class="text-gray-600 max-w-xl mx-auto mt-1">Grab these amazing limited-time discounts and bundle offers available right now at RK Supermart!</p>
+            </div>
+
+            <!-- Search Filter -->
+            <div class="mb-8 max-w-md mx-auto">
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                        <i class="fa-solid fa-search"></i>
+                    </span>
+                    <input type="text" id="offerSearch" onkeyup="filterOffers()" placeholder="Search products or offers (e.g., Fresca, Tea, Cookies)..." class="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:border-brand-500 shadow-sm text-sm">
+                </div>
+            </div>
+
+            <!-- Offers Grid -->
+            <div id="offersGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Yeh raha Products ka HTML Container -->
+    <div class="my-ecommerce-grid">
+                <!-- Offer 1 -->
+        <div class="ecommerce-wrapper">
+    <div class="auto-grid">
+ <div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="fresca drink beverage">
+                    <div class="p-6">
+                         <div class="exact-product-card">
+<img src="https://www.frescajuices.com/assets/images/about-thumb.png" alt="Image ka description" width="300" height="200">
+
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-orange-100 text-orange-700 text-xs font-bold px-2.5 py-1 rounded-md">Beverage Deal</span>
+                            <span class="text-xs font-semibold text-gray-400">#1</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Fresca Drink Combo</h3>
+                        <p class="text-gray-600 text-sm mb-4">Get heavy savings on refreshing Fresca drinks:</p>
+                        <ul class="space-y-2 text-sm text-gray-700 bg-gray-50 p-3 rounded-xl border border-gray-100">
+                            <li><i class="fa-solid fa-check text-brand-500 mr-2"></i><strong>1L Pack:</strong> ₹165 for 4</li>
+                            <li><i class="fa-solid fa-check text-brand-500 mr-2"></i><strong>2L Pack:</strong> Buy 1 Get 1 at ₹150</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+                        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+                    </div>
+                </div>
+
+                <!-- Offer 2 -->
+                <div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="macha tulsi adrak elaichi tea">
+                    <div class="p-6">
+                         <div class="exact-product-card">
+<img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSeeOWH1WN2IwILpb7kp6Gd27uYj4PGZHrRMjJHkMMoHeJRnm6-Qp6GjIU2PBbJN4d5t57kIcqu92vkfHj-Ck2L5KVqdLbkvpSRJuWKpuru6aF5N9I9-5-VUw" alt="Image ka description" width="300" height="200">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-green-100 text-green-700 text-xs font-bold px-2.5 py-1 rounded-md">Tea Special</span>
+                            <span class="text-xs font-semibold text-gray-400">#2</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Macha Tulsi Adrak Elaichi</h3>
+                        <p class="text-gray-600 text-sm mb-4">Pack of health and flavor with bonus quantity.</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+                            <p class="font-bold text-gray-900 mb-1">800g Pack + 200g × 2 Packs Free</p>
+                            <p class="text-brand-600 font-black text-lg">Only ₹459</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+                        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+                    </div>
+                </div>
+
+                <!-- Offer 3 -->
+                <div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="macha tae tea stool balti container gift">
+                    <div class="p-6">
+                         <div class="exact-product-card">
+<img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSeeOWH1WN2IwILpb7kp6Gd27uYj4PGZHrRMjJHkMMoHeJRnm6-Qp6GjIU2PBbJN4d5t57kIcqu92vkfHj-Ck2L5KVqdLbkvpSRJuWKpuru6aF5N9I9-5-VUw" alt="Image ka description" width="300" height="200">
+
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-purple-100 text-purple-700 text-xs font-bold px-2.5 py-1 rounded-md">Combo + Gift</span>
+                            <span class="text-xs font-semibold text-gray-400">#3</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Macha Tea 800g + Household Gift</h3>
+                        <p class="text-gray-600 text-sm mb-4">Buy Macha Tea 800g and pick <strong>one</strong> complimentary item:</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm mb-2">
+                            <p class="text-xs text-gray-500 mb-1">Choose any 1 item:</p>
+                            <p class="font-semibold text-gray-800">Stool OR Balti OR Container</p>
+                            <p class="text-brand-600 font-black text-lg mt-1">Complete Set @ ₹425</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+                        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+                    </div>
+                </div>
+
+                <!-- Offer 4 -->
+                <div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="saburi elaichy chai tea spoon">
+                    <div class="p-6">
+                         <div class="exact-product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSX1D3_-Jai8Kq8x21MkYJARNH0ol9DnX5sp6r_2QMbw&s=10" alt="Image ka description" width="300" height="200">
+
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-md">Special Perk</span>
+                            <span class="text-xs font-semibold text-gray-400">#4</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Saburi Elaichi Chai</h3>
+                        <p class="text-gray-600 text-sm mb-4">Authentic aroma with a special utensil inside.</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+                            <p class="font-bold text-gray-900">200g Pack + Spoon Inside</p>
+                            <p class="text-brand-600 font-black text-lg">Only ₹75</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+                        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+                    </div>
+                </div>
+
+                <!-- Offer 5 -->
+                <div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="masala noodles shopping free groceries">
+                    <div class="p-6">
+                         <div class="exact-product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl6IDdJlrxpQ4fOYIfh2d6EtMtsj8j8ub_eBpsxIQsFg&s=10" alt="Image ka description" width="300" height="200">
+
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-2.5 py-1 rounded-md">Freebie Offer</span>
+                            <span class="text-xs font-semibold text-gray-400">#5</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Free Masala Noodles</h3>
+                        <p class="text-gray-600 text-sm mb-4">Reward for your grocery basket size.</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+                            <p class="font-bold text-gray-900">Get 2 Masala Noodles FREE</p>
+                            <p class="text-gray-600 text-xs mt-1">On shopping worth ₹499 and above!</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">Automatic Scheme</span>
+                        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+                    </div>
+                </div>
+
+                <!-- Offer 6 -->
+                <div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="kfine elaichi tea jar">
+                    <div class="p-6">
+                         <div class="exact-product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyVRQHBG3FlwVtKjksSqAmaN7zi7LnOfBBUgITssbiuw&s=10" alt="Image ka description" width="300" height="200">
+
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-pink-100 text-pink-700 text-xs font-bold px-2.5 py-1 rounded-md">Jar Pack</span>
+                            <span class="text-xs font-semibold text-gray-400">#6</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Kfine Elaichi Tea Jar</h3>
+                        <p class="text-gray-600 text-sm mb-4">Premium tea storage jar with extra quantity.</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+                            <p class="font-bold text-gray-900">Tea Jar + Kfine 200g FREE</p>
+                            <p class="text-brand-600 font-black text-lg">Only ₹410</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+                        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+                    </div>
+                </div>
+
+                <!-- Offer 7 -->
+                <div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="choice elaichi tea 800g b1g1">
+                    <div class="p-6">
+                         <div class="exact-product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9kQK9laDs33Mg6xI_FhF2LyvrPivig3BBSTHCu7x4fg&s=10" alt="Image ka description" width="300" height="200">
+
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-md">B1G1 Free</span>
+                            <span class="text-xs font-semibold text-gray-400">#7</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Choice Elaichi Tea 800g</h3>
+                        <p class="text-gray-600 text-sm mb-4">Double the goodness with Buy 1 Get 1 free offer.</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+                            <p class="font-bold text-gray-900">Choice Elaichi Tea 800g (B1G1)</p>
+                            <p class="text-brand-600 font-black text-lg">Only ₹580</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+                        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+                    </div>
+                </div>
+
+                <!-- Offer 8 -->
+                <div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="choice tulsi adrak elaichi tea">
+                    <div class="p-6">
+                         <div class="exact-product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9kQK9laDs33Mg6xI_FhF2LyvrPivig3BBSTHCu7x4fg&s=10" alt="Image ka description" width="300" height="200">
+
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-2.5 py-1 rounded-md">Combo Offer</span>
+                            <span class="text-xs font-semibold text-gray-400">#8</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Choice Tulsi Adrak Elaichi</h3>
+                        <p class="text-gray-600 text-sm mb-4">Herbal blend with an extra packet free.</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+                            <p class="font-bold text-gray-900">800g Pack + Choice Tea 200g FREE</p>
+                            <p class="text-brand-600 font-black text-lg">Only ₹375</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+                        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+                    </div>
+                </div>
+
+                <!-- Offer 9 -->
+                <div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="unibic cookies biscuits 50% off">
+                    <div class="p-6">
+                         <div class="exact-product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVST7-31cko1rgHjIvbdY2_edl62GpS8HBCZEhBtNYZQ&s=10" alt="Image ka description" width="300" height="200">
+
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded-md">Half Price</span>
+                            <span class="text-xs font-semibold text-gray-400">#9</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Unibic Cookies Sale</h3>
+                        <p class="text-gray-600 text-sm mb-4">Crispy, delicious cookies at massive discounts.</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+                            <p class="font-bold text-gray-900">50% OFF on all Unibic Cookies</p>
+                            <p class="text-gray-600 text-xs mt-1">Applicable on MRP ₹75 & above items!</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">Limited Stock</span>
+                        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+                    </div>
+                </div>
+
+                <!-- Offer 10: Tide Detergent 7kg -->
+                <div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="tide detergent powder 7kg">
+                    <div class="p-6">
+                         <div class="exact-product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUj3fRyuEo0xMEdlilCYdqdYAm_Ct4Nlkgx71UOI5Buw&s=10" alt="Image ka description" width="300" height="200">
+
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-md">Laundry Care</span>
+                            <span class="text-xs font-semibold text-gray-400">#10</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Tide Detergent Powder 7kg</h3>
+                        <p class="text-gray-600 text-sm mb-4">7kg Tide + 2 Tide liquid sachets free (worth ₹10 each).</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+                            <p class="font-bold text-gray-900">Special Bundle Price</p>
+                            <p class="text-brand-600 font-black text-lg">Only ₹575</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+                        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+                    </div>
+                </div>
+
+                <!-- Offer 11: Wiwi Noodles -->
+                <div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="wiwi noodles b1g1">
+                    <div class="p-6">
+                          <div class="exact-product-card">
+<img src="
+https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmoZerFk-qwc4Dv2Zqg53reLtiYbAL2Qr6CBdAanEwcw&s=10" alt="Image ka description" width="300" height="200">
+
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-2.5 py-1 rounded-md">Noodles & Snacks</span>
+                            <span class="text-xs font-semibold text-gray-400">#11</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Wiwi Noodles B1G1</h3>
+                        <p class="text-gray-600 text-sm mb-4">Buy 1 Get 1 Free promotional snack offer.</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+                            <p class="font-bold text-gray-900">Buy 1 Pack, Get 2nd Pack Free</p>
+                            <p class="text-brand-600 font-black text-lg">MRP Based</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+                        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+                    </div>
+                </div>
+
+                <!-- Offer 12: Top Ramen Masala -->
+                <div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="top ramen masala noodles">
+                    <div class="p-6">
+  <div class="exact-product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe4PspgZixxejo2mi-bCs7lb4anMg4Af8SZmtUFxvSkw&s=10" alt="Image ka description" width="300" height="200">
+
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-orange-100 text-orange-800 text-xs font-bold px-2.5 py-1 rounded-md">Instant Food</span>
+                            <span class="text-xs font-semibold text-gray-400">#12</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Top Ramen Masala</h3>
+                        <p class="text-gray-600 text-sm mb-4">Delicious Top Ramen masala noodles pack.</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+                            <p class="font-bold text-gray-900">Special Promo Price</p>
+                            <p class="text-brand-600 font-black text-lg">Only ₹65</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+                        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+                    </div>
+                </div>
+
+                <!-- Offer 13: Nutrela Soya Chunks 1kg -->
+                <div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="nutrela soya chunks 1kg">
+                    <div class="p-6">
+  <div class="exact-product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStdupTlWjNR9ItCDCmerqhw_heZ2QeG_bHmjZeLj58RQ&s=10" alt="Image ka description" width="300" height="200">
+
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-green-100 text-green-800 text-xs font-bold px-2.5 py-1 rounded-md">Groceries</span>
+                            <span class="text-xs font-semibold text-gray-400">#13</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Nutrela Soya Chunks 1kg</h3>
+                        <p class="text-gray-600 text-sm mb-4">High-protein premium Nutrela soya chunks family pack.</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+                            <p class="font-bold text-gray-900">1kg Economy Pack</p>
+                            <p class="text-brand-600 font-black text-lg">Only ₹180</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+                        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+                    </div>
+                </div>
+
+                <!-- Offer 14: Fortune Soya Chunks 200g -->
+                <div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="fortune soya chunks 200g">
+                    <div class="p-6">
+  <div class="exact-product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB1Ioo32qjTDDrG_6XcBfiF72AbAKIFNp5332XXgQsPw&s=10" alt="Image ka description" width="300" height="200">
+
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded-md">Combo Offer</span>
+                            <span class="text-xs font-semibold text-gray-400">#14</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Fortune Soya Chunks 200g</h3>
+                        <p class="text-gray-600 text-sm mb-4">Fortune Soya Chunks 200g + 1 Top Ketchup free with this pack.</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+                            <p class="font-bold text-gray-900">Includes Free Ketchup</p>
+                            <p class="text-brand-600 font-black text-lg">Special Combo</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+                        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+                    </div>
+                </div>
+
+                <!-- Offer 15: Bambino Masala Noodles -->
+                <div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="bambino masala noodles b5g2">
+                    <div class="p-6">
+  <div class="exact-product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR658vn9x5PQWUOScGqOxGzvYELO0MGOzuXfgubMK5sQw&s=10" alt="Image ka description" width="300" height="200">
+
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-2.5 py-1 rounded-md">Super Saver</span>
+                            <span class="text-xs font-semibold text-gray-400">#15</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Bambino Masala Noodles</h3>
+                        <p class="text-gray-600 text-sm mb-4">Buy 5 packs of Bambino masala noodles and get 2 packs free (B5G2).</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+                            <p class="font-bold text-gray-900">B5G2 Mega Offer</p>
+                            <p class="text-brand-600 font-black text-lg">Great Savings</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+                        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+                    </div>
+                </div>
+
+                <!-- Offer 16: Maggi Noodles -->
+                <div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="maggi noodles special offer">
+                    <div class="p-6">
+  <div class="exact-product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7k0asX2HtKN8KDwGqN6ai1WVj5AcIkYIAMIIbGWXZzg&s=10" alt="Image ka description" width="300" height="200">
+
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-md">Hot Deal</span>
+                            <span class="text-xs font-semibold text-gray-400">#16</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Maggi Noodles Offer</h3>
+                        <p class="text-gray-600 text-sm mb-4">MRP ₹60 pack available at a discounted promo price.</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+                            <p class="font-bold text-gray-900">Promo Price</p>
+                            <p class="text-brand-600 font-black text-lg">Only ₹58</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+                        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+                    </div>
+                </div>
+
+                <!-- Offer 17: Bambino Pasta + 6 Noodles -->
+                <div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="bambino pasta 6 noodles">
+                    <div class="p-6">
+  <div class="exact-product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcimTO2-6XuLXIm7mfmJAB5egccj94YPPcCpuz0JIFnQ&s=10" alt="Image ka description" width="300" height="200">
+
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-purple-100 text-purple-700 text-xs font-bold px-2.5 py-1 rounded-md">Combo Special</span>
+                            <span class="text-xs font-semibold text-gray-400">#17</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Bambino Pasta + 6 Noodles</h3>
+                        <p class="text-gray-600 text-sm mb-4">Get Bambino Pasta along with 6 masala noodles free.</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+                            <p class="font-bold text-gray-900">Complete Snack Pack</p>
+                            <p class="text-brand-600 font-black text-lg">Only ₹100</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+                        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+                    </div>
+                </div>
+
+                <!-- Offer 18: Tide 3kg + Dishwash Bar -->
+                <div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="tide detergent 3kg bar">
+                    <div class="p-6">
+  <div class="exact-product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzoeeE-uANAhONEYINYgh7yH6jPrYcApTieFnukn8BUQ&s" alt="Image ka description" width="300" height="200">
+
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-md">Household Care</span>
+                            <span class="text-xs font-semibold text-gray-400">#18</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Tide Detergent 3kg + Bar</h3>
+                        <p class="text-gray-600 text-sm mb-4">Tide detergent powder 3kg pack with 1 dishwash bar free.</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+                            <p class="font-bold text-gray-900">Free Dishwash Bar Included</p>
+                            <p class="text-brand-600 font-black text-lg">Combo Offer</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+                        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+                    </div>
+                </div>
+
+                <!-- Offer 19: Tide 5kg + Bucket -->
+                <div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="tide detergent 5kg bucket">
+                    <div class="p-6">
+  <div class="exact-product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnus_s6DPQbvB1kaW72kENB7r6aDxI8gGYYr5VgxWTSA&s=10" alt="Image ka description" width="300" height="200">
+
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded-md">Household Care</span>
+                            <span class="text-xs font-semibold text-gray-400">#19</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Tide 5kg + Free Bucket</h3>
+                        <p class="text-gray-600 text-sm mb-4">Tide Detergent powder 5kg pack bundled with a sturdy utility bucket.</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+                            <p class="font-bold text-gray-900">Special Bundle Price</p>
+                            <p class="text-brand-600 font-black text-lg">Only ₹555</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+                        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+                    </div>
+                </div>
+
+                <!-- Offer 20: Nivea Body Lotion B1G1 -->
+                <div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="nivea body lotion b1g1">
+                    <div class="p-6">
+  <div class="exact-product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU_QcyqJsmduxNZ7RkIm3ljzt-0NlY_edMKOwun_JaJw&s=10" alt="Image ka description" width="300" height="200">
+
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-pink-100 text-pink-700 text-xs font-bold px-2.5 py-1 rounded-md">Personal Care</span>
+                            <span class="text-xs font-semibold text-gray-400">#20</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Nivea Body Lotion (B1G1)</h3>
+                        <p class="text-gray-600 text-sm mb-4">Nivea body lotion Buy 1 Get 1 Free promotional pack.</p>
+                        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+                            <p class="font-bold text-gray-900">Buy 1 Get 1 Free Pack</p>
+                            <p class="text-brand-600 font-black text-lg">Only ₹500</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+                        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+                        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+                    </div>
+                </div>
+
+            </div>
+<!-- Offer 21: Trishul Dishwash Gel -->
+<div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="trishul dishwash gel b1g1">
+    <div class="p-6">
+  <div class="exact-product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_m38l42L4HhZjUN755ogxHeCmMcUCJq2N8wtru16MzQ&s" alt="Image ka description" width="300" height="200">
+
+        <div class="flex justify-between items-start mb-4">
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-2.5 py-1 rounded-md">Super Saver</span>
+            <span class="text-xs font-semibold text-gray-400">#21</span>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Trishul Dishwash Gel</h3>
+        <p class="text-gray-600 text-sm mb-4">Buy 1 pack of Trishul Dishwash Gel and get 1 pack free (B1G1).</p>
+        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+            <p class="font-bold text-gray-900">B1G1 Mega Offer</p>
+            <p class="text-brand-600 font-black text-lg">Great Savings</p>
+        </div>
+    </div>
+    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+    </div>
+</div>
+    <!-- Offer 22: Denver Hamilton 100g Powder -->
+<div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="denver hamilton 100g powder b1g1">
+    <div class="p-6">
+          <div class="exact-product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa54-Im-3zPUQja4kYkfK0e30WG51cmfwTLLhOat-uDQ&s" alt="Image ka description" width="300" height="200">
+
+        <div class="flex justify-between items-start mb-4">
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-2.5 py-1 rounded-md">Super Saver</span>
+            <span class="text-xs font-semibold text-gray-400">#22</span>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Denver Hamilton Powder (100g)</h3>
+        <p class="text-gray-600 text-sm mb-4">Buy 1 pack of Denver Hamilton 100g Powder and get 1 pack free (B1G1).</p>
+        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+            <p class="font-bold text-gray-900">B1G1 Mega Offer</p>
+            <p class="text-brand-600 font-black text-lg">Great Savings</p>
+        </div>
+    </div>
+    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+    </div>
+</div>
+
+<!-- Offer 23: J-Fresh Toilet Cleaner 1L -->
+<div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="j-fresh toilet cleaner 1l b1g1">
+    <div class="p-6">
+  <div class="exact-product-card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTzYHGSqL12b0h931Duk87idqcoX97w72i6Cnfo4gPZg&s" alt="Image ka description" width="300" height="200">
+        <div class="flex justify-between items-start mb-4">
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-2.5 py-1 rounded-md">Super Saver</span>
+            <span class="text-xs font-semibold text-gray-400">#23</span>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">J-Fresh Toilet Cleaner (1L)</h3>
+        <p class="text-gray-600 text-sm mb-4">Buy 1 bottle of J-Fresh Toilet Cleaner 1L and get 1 bottle free (B1G1).</p>
+        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+            <p class="font-bold text-gray-900">B1G1 Mega Offer</p>
+            <p class="text-brand-600 font-black text-lg">Great Savings</p>
+        </div>
+    </div>
+    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+    </div>
+</div>
+
+<!-- Offer 24: Denver Hamilton 300g Powder -->
+<div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="denver hamilton 300g powder b1g1">
+    <div class="p-6">
+  <div class="exact-product-card">
+<img src="https://imgs.search.brave.com/Nu7v2DQ8piFqLzjD76DDq-OOrcl0OuJsH1MW381BnpA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NTFsVHMrK0FoYkwu/anBn" alt="Image ka description" width="300" height="200">
+        <div class="flex justify-between items-start mb-4">
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-2.5 py-1 rounded-md">Super Saver</span>
+            <span class="text-xs font-semibold text-gray-400">#24</span>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Denver Hamilton Powder (300g)</h3>
+        <p class="text-gray-600 text-sm mb-4">Buy 1 pack of Denver Hamilton 300g Powder and get 1 pack free (B1G1).</p>
+        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+            <p class="font-bold text-gray-900">B1G1 Mega Offer</p>
+            <p class="text-brand-600 font-black text-lg">Great Savings</p>
+        </div>
+    </div>
+    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+    </div>
+</div>
+
+<!-- Offer 25: Denver Blackcode Talc -->
+<div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="denver blackcode talc b1g1">
+    <div class="p-6">
+          <div class="exact-product-card">
+<img src="https://denverformen.com/products/black-code-talc-300gm" alt="Image ka description" width="300" height="200">
+        
+        <div class="flex justify-between items-start mb-4">
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-2.5 py-1 rounded-md">Super Saver</span>
+            <span class="text-xs font-semibold text-gray-400">#25</span>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Denver Blackcode Talc</h3>
+        <p class="text-gray-600 text-sm mb-4">Buy 1 pack of Denver Blackcode Talc and get 1 pack free (B1G1).</p>
+        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+            <p class="font-bold text-gray-900">B1G1 Mega Offer</p>
+            <p class="text-brand-600 font-black text-lg">Great Savings</p>
+        </div>
+    </div>
+    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+    </div>
+</div>
+
+<!-- Offer 26: Sapphire's Truffle -->
+<div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="sapphire truffle 150rs">
+    <div class="p-6">
+          <div class="exact-product-card">
+<img src="https://imgs.search.brave.com/KGcN-HxJGxkeI2VVVPY075WIXxm-x1y7gt-RyRdiT5w/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly81Lmlt/aW1nLmNvbS9kYXRh/NS9TRUxMRVIvRGVm/YXVsdC8yMDI2LzIv/NTg2NTgwNTQ0L0FL/L0pQL1RILzEzMTk4/MTc2L3RydWZmbGVz/LWNob2NvbGF0ZS0x/MDAweDEwMDAud2Vi/cA" alt="Image ka description" width="300" height="200">
+        <div class="flex justify-between items-start mb-4">
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-2.5 py-1 rounded-md">Super Saver</span>
+            <span class="text-xs font-semibold text-gray-400">#26</span>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Sapphire's Truffle</h3>
+        <p class="text-gray-600 text-sm mb-4">Grab delicious Sapphire's Truffle at a special discounted store price.</p>
+        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+            <p class="font-bold text-gray-900">Special Offer Price</p>
+            <p class="text-brand-600 font-black text-lg">Only ₹150</p>
+        </div>
+    </div>
+    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+    </div>
+</div>
+
+<!-- Offer 27: Parle Occasions Cookies 310g -->
+<div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="parle occasions cookies 310g 90rs">
+    <div class="p-6">
+  <div class="exact-product-card">
+<img src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=1800/da/cms-assets/cms/product/55749a32-db42-466c-a1c0-9aa7628b3232.png?bg_token=color.background.quaternary"  alt="Image ka description" width="300" height="200">
+        <div class="flex justify-between items-start mb-4">
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-2.5 py-1 rounded-md">Super Saver</span>
+            <span class="text-xs font-semibold text-gray-400">#27</span>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Parle Occasions Cookies (310g)</h3>
+        <p class="text-gray-600 text-sm mb-4">Enjoy Parle Occasions Cookies 310g pack at a flat discount off MRP.</p>
+        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+            <p class="font-bold text-gray-900">MRP <span class="line-through text-gray-400">₹150</span></p>
+            <p class="text-brand-600 font-black text-lg">Offer Price: ₹90 Only</p>
+        </div>
+              </div>
+    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+           </div>
+      </div>
+               <!-- Offer 28: HRT Professional Purifies Tulsi & Neem Facewash -->
+<div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="hrt professional purifies tulsi neem facewash 145rs">
+    <div class="p-6">
+          <div class="exact-product-card">
+              
+<img src=" " alt="Image ka description" width="300" height="200">
+        <div class="flex justify-between items-start mb-4">
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-2.5 py-1 rounded-md">Super Saver</span>
+            <span class="text-xs font-semibold text-gray-400">#28</span>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">HRT Professional Tulsi & Neem Facewash</h3>
+        <p class="text-gray-600 text-sm mb-4">Purifies skin with natural Tulsi and Neem extracts at a special store discount.</p>
+        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+            <p class="font-bold text-gray-900">MRP <span class="line-through text-gray-400">₹299</span></p>
+            <p class="text-brand-600 font-black text-lg">Offer Price: ₹145</p>
+        </div>
+    </div>
+    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+    </div>
+</div>
+
+<!-- Offer 29: Mamaearth Multani Mitti Oil Balance Facewash -->
+<div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="mamaearth multani mitti oil balance facewash 205rs">
+    <div class="p-6">
+          <div class="exact-product-card">
+<img src="https://imgs.search.brave.com/qmAL8S1uoaxiGa_1ZGADZVRrwQ87wz8G5Z_F121tsZ4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tYW1h/ZWFydGguaW4vY2Ru/L3Nob3AvZmlsZXMv/MV8xMDAuanBnP3Y9/MTc3Nzk3NTMwNCZ3/aWR0aD01NTk" alt="Image ka description" width="300" height="200">
+        <div class="flex justify-between items-start mb-4">
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-2.5 py-1 rounded-md">Super Saver</span>
+            <span class="text-xs font-semibold text-gray-400">#29</span>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Mamaearth Multani Mitti Oil Balance Facewash</h3>
+        <p class="text-gray-600 text-sm mb-4">Controls excess oil and refreshes skin with Multani Mitti at a discounted price.</p>
+        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+            <p class="font-bold text-gray-900">MRP <span class="line-through text-gray-400">₹285</span></p>
+            <p class="text-brand-600 font-black text-lg">Offer Price: ₹205</p>
+        </div>
+    </div>
+    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+    </div>
+</div>
+
+<!-- Offer 30: Multani Fruit Body Lotion 400ml -->
+<div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="multani fruit body lotion 400ml 165rs">
+    <div class="p-6">
+          <div class="exact-product-card">
+<img src=" https://imgs.search.brave.com/BLy4WYlF4VXyvJsvMpn4-nuhFHPtqM5UJZtHiM_kpZs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/MzE1N0hBNm9sOUwu/anBn" alt="Image ka description" width="300" height="200">
+        <div class="flex justify-between items-start mb-4">
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-2.5 py-1 rounded-md">42% OFF</span>
+            <span class="text-xs font-semibold text-gray-400">#30</span>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Multani Fruit Body Lotion (400ml)</h3>
+        <p class="text-gray-600 text-sm mb-4">Nourishing 400ml fruit body lotion available at a massive 42% off MRP.</p>
+        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+            <p class="font-bold text-gray-900">MRP <span class="line-through text-gray-400">₹240</span> <span class="text-green-600 font-semibold">(42% OFF)</span></p>
+            <p class="text-brand-600 font-black text-lg">Offer Price: ₹165</p>
+        </div>
+    </div>
+    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+    </div>
+</div>
+                 <!-- Offer 31: Alite Hair Removal Spray 200ml -->
+<div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="alite hair removal spray 200ml 235rs">
+    <div class="p-6">
+          <div class="exact-product-card">
+<img src="https://imgs.search.brave.com/P7thktgDgEy0mQwQPnTtcZB7DDeD6flOxxrAqWgHoO0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NDFoSklYQXVIMEwu/anBn " alt="Image ka description" width="300" height="200">
+        <div class="flex justify-between items-start mb-4">
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-2.5 py-1 rounded-md">35% OFF</span>
+            <span class="text-xs font-semibold text-gray-400">#31</span>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Alite Hair Removal Spray (200ml)</h3>
+        <p class="text-gray-600 text-sm mb-4">Quick and easy 200ml hair removal spray available at 35% off MRP.</p>
+        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+            <p class="font-bold text-gray-900">MRP <span class="line-through text-gray-400">₹375</span> <span class="text-green-600 font-semibold">(35% OFF)</span></p>
+            <p class="text-brand-600 font-black text-lg">Offer Price: ₹235</p>
+        </div>
+    </div>
+    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+    </div>
+</div>
+
+<!-- Offer 32: Meglow Sunscreen Lotion SPF 30+ 50ml -->
+  
+<div class="offer-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all flex flex-col justify-between" data-name="meglow sunscreen lotion spf30+ 50ml 220rs">
+    <div class="p-6">
+          <div class="exact-product-card">
+<img src=" https://imgs.search.brave.com/lDqCvT8T64vI8tL1TenDgCagswzJqVI_04dOiBzDr5E/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL0kv/NDE4UUlBWTh4S0wu/anBn" alt="Image ka description" width="300" height="200">
+        <div class="flex justify-between items-start mb-4">
+            <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-2.5 py-1 rounded-md">52% OFF</span>
+            <span class="text-xs font-semibold text-gray-400">#32</span>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Meglow Sunscreen Lotion SPF 30+ (50ml)</h3>
+        <p class="text-gray-600 text-sm mb-4">Broad-spectrum SPF 30+ sun protection 50ml pack at a massive 52% off MRP.</p>
+        <div class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-sm">
+            <p class="font-bold text-gray-900">MRP <span class="line-through text-gray-400">₹475</span> <span class="text-green-600 font-semibold">(52% OFF)</span></p>
+            <p class="text-brand-600 font-black text-lg">Offer Price: ₹220</p>
+        </div>
+    </div>
+    <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 flex justify-between items-center">
+        <span class="text-xs text-brand-600 font-bold uppercase tracking-wider">In Store Only</span>
+        <button class="text-xs bg-brand-500 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-brand-600 transition cursor-pointer">Claim Deal</button>
+    </div>
+</div>
+
+        </section>
+
+        <!-- ================= SECTION 2: STORE SCHEMES ================= -->
+        <section id="tab-schemes" class="tab-content hidden">
+            <div class="text-center mb-10">
+                <span class="bg-brand-100 text-brand-700 text-xs font-bold uppercase px-3 py-1 rounded-full">Customer Benefits</span>
+                <h2 class="text-3xl font-extrabold text-gray-900 mt-2">Active Store Schemes & Rewards</h2>
+                <p class="text-gray-600 max-w-xl mx-auto mt-1">Discover value-added shopping schemes designed to give you more every time you walk into RK Supermart.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Scheme Card 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                    <div>
+                        <div class="bg-brand-50 text-brand-600 w-12 h-12 flex items-center justify-center rounded-xl mb-4">
+                            <i class="fa-solid fa-basket-shopping text-xl"></i>
+                        </div>
+                        <span class="text-xs font-bold text-brand-600 uppercase tracking-widest">Active Scheme</span>
+                        <h3 class="text-xl font-bold text-gray-900 mt-1 mb-2">Shopping Basket Bonus (₹499+)</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">Every customer who builds a shopping basket total of <strong>₹499 or more</strong> automatically qualifies for our instant kitchen reward: <strong>2 Masala Noodles packets absolutely FREE!</strong></p>
+                    </div>
+                    <div class="inline-flex items-center text-xs font-bold text-gray-700 bg-gray-100 px-3 py-2 rounded-lg">
+                        <i class="fa-solid fa-circle-check text-green-600 mr-2"></i> No coupon code needed at counter
+                    </div>
+                </div>
+
+                <!-- Scheme Card 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                    <div>
+                        <div class="bg-brand-50 text-brand-600 w-12 h-12 flex items-center justify-center rounded-xl mb-4">
+                            <i class="fa-solid fa-gift text-xl"></i>
+                        </div>
+                        <span class="text-xs font-bold text-brand-600 uppercase tracking-widest">Household Bundling</span>
+                        <h3 class="text-xl font-bold text-gray-900 mt-1 mb-2">Utility Gift Combo Scheme</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">Purchase featured bulk tea items like <strong>Macha Tea 800g</strong> and take home your choice of a durable <strong>Stool, Balti, or Storage Container</strong>.</p>
+                    </div>
+                    <div class="inline-flex items-center text-xs font-bold text-gray-700 bg-gray-100 px-3 py-2 rounded-lg">
+                        <i class="fa-solid fa-circle-check text-green-600 mr-2"></i> Pick your preferred item at checkout
+                    </div>
+                </div>
+
+                <!-- Scheme Card 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                    <div>
+                        <div class="bg-brand-50 text-brand-600 w-12 h-12 flex items-center justify-center rounded-xl mb-4">
+                            <i class="fa-solid fa-percent text-xl"></i>
+                        </div>
+                        <span class="text-xs font-bold text-brand-600 uppercase tracking-widest">Snack Saver</span>
+                        <h3 class="text-xl font-bold text-gray-900 mt-1 mb-2">Half Price Cookie Festival</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">Stock up your snack shelf with a flat <strong>50% discount</strong> on all premium Unibic Cookies having an MRP of ₹75 and above.</p>
+                    </div>
+                    <div class="inline-flex items-center text-xs font-bold text-gray-700 bg-gray-100 px-3 py-2 rounded-lg">
+                        <i class="fa-solid fa-circle-check text-green-600 mr-2"></i> Applies instantly on eligible cookies
+                    </div>
+                </div>
+
+                <!-- Scheme Card 4 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                    <div>
+                        <div class="bg-brand-50 text-brand-600 w-12 h-12 flex items-center justify-center rounded-xl mb-4">
+                            <i class="fa-solid fa-mug-hot text-xl"></i>
+                        </div>
+                        <span class="text-xs font-bold text-brand-600 uppercase tracking-widest">Tea Lover's Club</span>
+                        <h3 class="text-xl font-bold text-gray-900 mt-1 mb-2">Extra Grammage & Jar Savings</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">Never run out of morning tea! Take advantage of our bulk tea packs featuring free extra packets or reusable airtight storage jars.</p>
+                    </div>
+                    <div class="inline-flex items-center text-xs font-bold text-gray-700 bg-gray-100 px-3 py-2 rounded-lg">
+                        <i class="fa-solid fa-circle-check text-green-600 mr-2"></i> High quality assured
+                    </div>
+                </div>
+
+                <!-- Scheme Card 5 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                    <div>
+                        <div class="bg-brand-50 text-brand-600 w-12 h-12 flex items-center justify-center rounded-xl mb-4">
+                            <i class="fa-solid fa-ticket text-xl"></i>
+                        </div>
+                        <span class="text-xs font-bold text-brand-600 uppercase tracking-widest">Special Scheme</span>
+                        <h3 class="text-xl font-bold text-gray-900 mt-1 mb-2">Lucky Draw Coupon Offer</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">Shop for <strong>₹4,999 or more</strong> and get a chance to win exciting prizes through our exclusive lucky draw event!</p>
+                    </div>
+                    <div class="inline-flex items-center text-xs font-bold text-gray-700 bg-gray-100 px-3 py-2 rounded-lg">
+                        <i class="fa-solid fa-circle-check text-green-600 mr-2"></i> Min. Spend ₹4999+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+</section>
+ <!-- ================= SECTION 3: LUCKY CUSTOMERS ================= -->
+<!-- Lucky Draw Clickable Section (CSS + HTML + JS Ek Hi Jagah) -->
+<style>
+    .lucky-draw-wrapper {
+        max-width: 800px;
+        margin: 30px auto;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 0 15px;
+    }
+
+    /* Toggle Button Styling */
+    .lucky-toggle-btn {
+        width: 100%;
+        background: linear-gradient(135deg, #3498db, #2980b9);
+        color: white;
+        border: none;
+        padding: 16px 20px;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        transition: background 0.3s ease, transform 0.2s ease;
+        text-align: center;
+    }
+
+    .lucky-toggle-btn:hover {
+        background: linear-gradient(135deg, #2980b9, #1c5980);
+        transform: translateY(-2px);
+    }
+
+    /* Content Box Styling */
+    .winners-content {
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        margin-top: 15px;
+        border: 1px solid #e0e0e0;
+    }
+
+    .winners-header {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .winners-header h3 {
+        margin: 0;
+        color: #2c3e50;
+        font-size: 22px;
+        text-align: center;
+    }
+
+    /* Search Input */
+    .lucky-search-input {
+        padding: 10px 15px;
+        font-size: 15px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        outline: none;
+        width: 100%;
+        box-sizing: border-box;
+        transition: border-color 0.3s;
+    }
+
+    .lucky-search-input:focus {
+        border-color: #3498db;
+    }
+
+    /* Table Styling */
+    .lucky-table-container {
+        max-height: 350px;
+        overflow-y: auto;
+        border-radius: 6px;
+        border: 1px solid #eee;
+    }
+
+    .lucky-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #ffffff;
+    }
+
+    .lucky-table th, .lucky-table td {
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    .lucky-table th {
+        background-color: #3498db;
+        color: white;
+        font-weight: 600;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .lucky-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .lucky-table tr:hover {
+        background-color: #e1f5fe;
+    }
+</style>
+
+<div class="lucky-draw-wrapper">
+    <!-- Click karne wala button -->
+    <button id="toggleWinnersBtn" class="lucky-toggle-btn">
+        🎉 Click to View Lucky Draw Winners (Series 01 - 2000)
+    </button>
+
+    <!-- Yeh section click karne par show/hide hoga -->
+    <div id="winnersSection" class="winners-content" style="display: none;">
+        <div class="winners-header">
+            <h3>🏆 Lucky Draw Winners List 🏆</h3>
+            <!-- Search bar jisse user apna coupon ya naam dhoond sake -->
+            <input type="text" id="searchCoupon" class="lucky-search-input" placeholder="🔍 Search by Coupon Code (e.g. LD-501) or Name...">
+        </div>
+        
+        <div class="lucky-table-container">
+            <table class="lucky-table">
+                <thead>
+                    <tr>
+                        <th>Series No.</th>
+                        <th>Coupon Code</th>
+                        <th>Customer Name</th>
+                    </tr>
+                </thead>
+                <tbody id="winnersTableBody">
+                    <!-- JavaScript yahan automatically data daal dega -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 1. Button Click par Section ko Show/Hide karne ka code
+    const toggleBtn = document.getElementById('toggleWinnersBtn');
+    const winnersSection = document.getElementById('winnersSection');
+
+    toggleBtn.addEventListener('click', function() {
+        if (winnersSection.style.display === 'none') {
+            winnersSection.style.display = 'block';
+            toggleBtn.innerHTML = '❌ Hide Lucky Draw Winners';
+        } else {
+            winnersSection.style.display = 'none';
+            toggleBtn.innerHTML = '🎉 Click to View Lucky Draw Winners (Series 01 - 2000)';
+        }
+    });
+
+    // 2. Winners Data ( coupons ke naam yahan add honge)
+    // Aap isme aur bhi names aage copy-paste karke add kar sakte hain: { series: "502", code: "LD-502", name: "Naam" }
+    const winnersData = [
+        { series: "1", code: "LD-001", name: "HIMANSHI SHARMA" },
+        { series: "2", code: "LD-002", name: "MANISHA JANGRA" },
+        { series: "3", code: "LD-003", name: "Amit Kumar" },
+        { series: "4", code: "LD-004", name: "Neha Singh" },
+        { series: "5", code: "LD-005", name: "Vikas Gupta" }
+        // ... Yahan apne baaki 501 tak ke winners add kar lein
+    ];
+
+    const tableBody = document.getElementById('winnersTableBody');
+
+    // Table mein data render karne ka function
+    function renderTable(data) {
+        tableBody.innerHTML = '';
+        if (data.length === 0) {
+            tableBody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: #7f8c8d;">No winner found!</td></tr>`;
+            return;
+        }
+        data.forEach(item => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${item.series}</td>
+                <td>${item.code}</td>
+                <td>${item.name}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    // Pehli baar table load karna
+    renderTable(winnersData);
+
+    // 3. Search Feature (Coupon code ya naam type karke search karne ke liye)
+    document.getElementById('searchCoupon').addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        const filteredData = winnersData.filter(winner => 
+            winner.code.toLowerCase().includes(searchTerm) || 
+            winner.name.toLowerCase().includes(searchTerm) ||
+            winner.series.includes(searchTerm)
+        );
+        renderTable(filteredData);
+    });
+</script>      
+  <!-- ================= SECTION 4: CUSTOMER FEEDBACK ================= -->
+        <section id="tab-feedback" class="tab-content hidden">
+            <div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                <div class="text-center mb-8">
+                    <span class="bg-brand-100 text-brand-700 text-xs font-bold uppercase px-3 py-1 rounded-full">We Value Your Voice</span>
+                    <h2 class="text-3xl font-extrabold text-gray-900 mt-2">Customer Feedback & Suggestions</h2>
+                    <p class="text-gray-600 text-sm mt-1">Help us serve you better by sharing your feedback or suggestions regarding products and offers.</p>
+                </div>
+
+                <form onsubmit="submitFeedback(event)" class="space-y-5">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Your Full Name</label>
+                        <input type="text" id="fbName" required placeholder="Enter your name" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-500 text-sm">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Phone Number (Optional)</label>
+                            <input type="tel" id="fbPhone" placeholder="Enter phone number" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-500 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Rating</label>
+                            <select id="fbRating" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-500 text-sm">
+                                <option value="⭐⭐⭐⭐⭐ (Excellent)">⭐⭐⭐⭐⭐ - Excellent</option>
+                                <option value="⭐⭐⭐⭐ (Very Good)">⭐⭐⭐⭐ - Very Good</option>
+                                <option value="⭐⭐⭐ (Good)">⭐⭐⭐ - Good</option>
+                                <option value="⭐⭐ (Needs Improvement)">⭐⭐ - Needs Improvement</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Your Feedback / Suggestions</label>
+                        <textarea id="fbMessage" rows="4" required placeholder="Write your feedback here..." class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-brand-500 text-sm"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-3.5 rounded-xl shadow-md transition cursor-pointer">
+                        <i class="fa-solid fa-paper-plane mr-2"></i> Submit Feedback
+                    </button>
+                </form>
+                <div id="fbSuccessMsg" class="hidden mt-4 p-4 bg-green-50 text-green-700 font-semibold text-center rounded-xl border border-green-200">
+                    🎉 Thank you! Your feedback has been successfully submitted to RK Supermart management.
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer & Connect Options -->
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-center md:text-left">
+                <h3 class="text-lg font-black text-gray-900">RK SUPERMART</h3>
+                <p class="text-xs text-gray-500">Your trusted neighborhood destination for daily offers & quality products.</p>
+            </div>
+
+            <!-- Connect Options (Instagram & Facebook) -->
+            <div class="flex items-center space-x-4">
+                <span class="text-xs font-bold text-gray-600 uppercase tracking-wider">Connect With Us:</span>
+                <a href="https://www.instagram.com/rk_supermart_kalanaur/" target="_blank" rel="noopener noreferrer" class="bg-pink-50 text-pink-600 hover:bg-pink-600 hover:text-white p-3 rounded-xl transition shadow-sm" title="Instagram">
+                    <i class="fa-brands fa-instagram text-lg"></i>
+                </a>
+                <a href="https://facebook.com/people/rk-supermart-kalanaur/61589446510525/" target="_blank" rel="noopener noreferrer" class="bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white p-3 rounded-xl transition shadow-sm" title="Facebook">
+                    <i class="fa-brands fa-facebook-f text-lg"></i>
+                </a>
+            </div>
+
+            <div class="text-xs text-gray-400 text-center md:text-right">
+                &copy; 2026 RK Supermart. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Details Popup Modal -->
+    <div id="dealModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center;">
+        <div style="background: #fff; width: 90%; max-width: 500px; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.3); position: relative;">
+            
+            <!-- Close Button -->
+            <button onclick="closeDealModal()" style="position: absolute; top: 12px; right: 15px; background: #e74c3c; color: #fff; border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 16px; font-weight: bold; cursor: pointer; z-index: 10;">&times;</button>
+            
+            <!-- Product Image -->
+            <div style="width: 100%; height: 220px; background: #f8f9fa;">
+                <img id="modalImg" src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=500&q=80" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+
+            <!-- Product Details Content -->
+            <div style="padding: 20px;">
+                <span id="modalCategory" style="background: #e67e22; color: #fff; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase;">Supermart Deal</span>
+                <h2 id="modalTitle" style="margin: 10px 0 5px 0; font-size: 22px; font-weight: 800; color: #1a1a1a;">Product Name</h2>
+                <p id="modalDesc" style="font-size: 14px; color: #666; margin-bottom: 15px; line-height: 1.5;">Detailed description here.</p>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee; padding-top: 12px;">
+                    <span id="modalPrice" style="font-size: 14px; font-weight: 700; color: #555;">Available at billing counter</span>
+                    <span style="background: #27ae60; color: #fff; padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 700;">In Store Only</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive JavaScript Script -->
+    <script>
+        // Tab Switcher Logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            ['offers', 'schemes', 'feedback'].forEach(id => {
+                const btn = document.getElementById('nav-' + id);
+                if(id === tabId) {
+                    btn.className = "px-4 py-2 rounded-lg text-sm font-bold transition-all bg-brand-500 text-white shadow";
+                } else {
+                    btn.className = "px-4 py-2 rounded-lg text-sm font-bold transition-all text-gray-600 hover:text-brand-600 bg-gray-200";
+                }
+            });
+
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Live Search Filter for Offers
+        function filterOffers() {
+            const input = document.getElementById('offerSearch').value.toLowerCase();
+            const cards = document.querySelectorAll('.offer-card');
+
+            cards.forEach(card => {
+                const keywords = card.getAttribute('data-name');
+                if (keywords.includes(input)) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // Feedback Form Submission Handler
+        function submitFeedback(event) {
+            event.preventDefault();
+            document.getElementById('fbSuccessMsg').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('fbName').value = '';
+                document.getElementById('fbPhone').value = '';
+                document.getElementById('fbMessage').value = '';
+                document.getElementById('fbSuccessMsg').classList.add('hidden');
+            }, 4000);
+        }
+
+        // Initialize modal triggers for all claim deal buttons
+        document.addEventListener("click", function(event) {
+            if (event.target.tagName === "BUTTON" && event.target.innerText.trim() === "Claim Deal") {
+                event.preventDefault();
+                let card = event.target.closest(".offer-card") || event.target.parentElement;
+                
+                let title = card.querySelector("h3") ? card.querySelector("h3").innerText : "RK Supermart Special Offer";
+                let desc = card.querySelector("p") ? card.querySelector("p").innerText : "Visit RK Supermart store to claim this amazing offer.";
+                
+                document.getElementById('modalTitle').innerText = title;
+                document.getElementById('modalDesc').innerText = desc;
+                document.getElementById('dealModal').style.display = 'flex';
+            }
+        });
+
+        function closeDealModal() {
+            document.getElementById('dealModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            let modal = document.getElementById('dealModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const headerLuckyBtn = document.getElementById('headerLuckyBtn');
+        const luckyModal = document.getElementById('luckyModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        // Check karein ki button aur modal exist karte hain ya nahi
+        if (headerLuckyBtn && luckyModal) {
+            headerLuckyBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                luckyModal.style.display = 'flex';
+            });
+        }
+
+        if (closeModalBtn && luckyModal) {
+            closeModalBtn.addEventListener('click', function() {
+                luckyModal.style.display = 'none';
+            });
+        }
+
+        window.addEventListener('click', function(event) {
+            if (event.target === luckyModal) {
+                luckyModal.style.display = 'none';
+            }
+        });
+
+        // 🏆 Yahan apne winners ke naam add karein (Aap 501+ ya jitne chahein jod sakte hain)
+        const winnersData = [
+            { series: "1", code: "RK-001", name: "HIMANSHI SHARMA" },
+            { series: "2", code: "RK-002", name: "MANISHA JANGRA" },
+            { series: "3", code: "RK-003", name: "Amit Kumar" },
+            { series: "4", code: "RK-004", name: "Neha Singh" },
+            { series: "5", code: "RK-005", name: "Vikas Gupta" }
+        ];
+
+        const tableBody = document.getElementById('winnersTableBody');
+
+        function renderTable(data) {
+            if (!tableBody) return;
+            tableBody.innerHTML = '';
+            if (data.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="3" style="text-align: center; color: #7f8c8d;">No winner found!</td></tr>`;
+                return;
+            }
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.series}</td>
+                    <td>${item.code}</td>
+                    <td>${item.name}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        renderTable(winnersData);
+
+        // Live Search Functionality
+        const searchInput = document.getElementById('searchCoupon');
+        if (searchInput) {
+            searchInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredData = winnersData.filter(winner => 
+                    winner.code.toLowerCase().includes(searchTerm) || 
+                    winner.name.toLowerCase().includes(searchTerm) ||
+                    winner.series.includes(searchTerm)
+                );
+                renderTable(filteredData);
+            });
+        }
+    });
+</script>
+<p>&copy;Created by <strong>Mr.Dhawan</strong></p>
+<style>
+    .ecommerce-wrapper {
+        width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+    
+    .auto-grid {
+        display: grid;
+        /* Mobile aur PC screen ke mutabiq items apne aap adjust honge */
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Aapke purane products par lagne wali class */
+    .exact-product-card {
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 360px; /* Sabhi cards ki height ekdum barabar karega */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+        transition: box-shadow 0.2s ease;
+    }
+
+    .exact-product-card:hover {
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+</style>
+
+</body>
+</html>
